@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+  background-color: #fafafa;
+}
+
+.header {
+  background-color: blanchedalmond;
+  height:80px;
+  width:100%;
+  padding:15px;
+}
+
+input {
+  margin:30px;
+  width:225px;
+  height:50px;
+  font-size:15px;
+  text-align:center;
+  
+}
+
+button {
+  width:200px;
+  height:40px;
+  margin:10px;
+  font-size:15px;
+  background-color: #008ba1;
+  color: white;
+}
+
+li {
+  list-style-type: none;
+}
+
+.favorite {
+  width:400px;
+  height:150px;
+  margin: 0 auto;
+  background-color: #88aac8;
+}
+
+.favorite ul {
+  width:100%;
+  padding-left:0;
+  padding-top:10px;
+}
