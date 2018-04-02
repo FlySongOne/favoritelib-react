@@ -20,6 +20,10 @@ class App extends Component {
     this.handleInputContentValue = this.handleInputContentValue.bind(this);
     this.createLibrary = this.createLibrary.bind(this);
     this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
+    this.updateLibrary = this.updateLibrary.bind(this);
+    this.handleLibraryChange = this.handleLibraryChange.bind(this);
+    this.handleUpdateSubmit = this.handleUpdateSubmit.bind(this);
+    this.updateIndex = "";
   }
 
   componentDidMount = () => {
@@ -111,6 +115,7 @@ class App extends Component {
           updatedLibraryList.push(newLibraryResponse);
 
           this.setState({libraryTable: updatedLibraryList});
+          console.log("hahhaha" , this.state.libraryTable);
      
 
     } catch( error ) {
@@ -119,12 +124,41 @@ class App extends Component {
     }
   }
 
+  updateLibrary = async () => {
+    let index = this.updateIndex;
+    try {
+        const libraryToUpdate = this.state.libraryTable[index]
+        console.log(index);
+        await axios.patch(`/libraries/${libraryToUpdate.id}`, libraryToUpdate)
+    } catch(error) {
+        console.log('Error updating library!')
+        console.log(error)
+    }
+  }
+
+  handleLibraryChange = (event, index) => {
+    this.updateIndex = index; // to use the index for updating 
+    const attributeToChange = event.target.name;
+    const newValue = event.target.value;
+
+    const updatedLibraryList = [...this.state.libraryTable];
+    const libraryToUpdate = updatedLibraryList[index]
+    libraryToUpdate[attributeToChange] = newValue
+    
+    this.setState({libraryTable: updatedLibraryList})
+    console.log(this.state.libraryTable);
+  }
+
   handleCreateSubmit = ( event ) => {
       event.preventDefault();
       this.createLibrary(this.state.library);   
   }
 
-
+  handleUpdateSubmit = ( event) => {
+      event.preventDefault();
+      this.updateLibrary();
+  }
+  
   render() {
     return (
       <div className="App">
@@ -137,13 +171,8 @@ class App extends Component {
           handleInputContentValue={this.handleInputContentValue}
           inputContentValue={this.state.inputContentValue} 
         />
-        <Library library={this.state.library} />
-        <div>
-            <button
-                onClick={ this.handleCreateSubmit}>
-                Add to My Favorite Library 
-            </button>
-        </div>
+        <Library library={this.state.library} handleCreateSubmit={this.handleCreateSubmit}/>
+       
         <h3>My Favorite Library List</h3>
         {
             this.state.libraryTable.map((library, index) => {
@@ -153,6 +182,9 @@ class App extends Component {
                       key={index}
                       index={index}
                       deleteLibrary={this.deleteLibrary}
+                      updateLibrary={this.updateLibrary}
+                      handleLibraryChange={this.handleLibraryChange}
+                      handleUpdateSubmit={this.handleUpdateSubmit}
                     />
 
                 )

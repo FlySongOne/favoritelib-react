@@ -6,12 +6,18 @@ class Library extends Component {
       <div className="">
 
          <h3>You searched the library below</h3> 
-         <p>Library Name: {this.props.library.name}</p>
-         <p>Address: {this.props.library.address} </p>
-         <p>City: {this.props.library.city} </p>
-         <p>Postal Code: {this.props.library.postalCode}</p>
-         
-      </div>    
+         <p>{this.props.library.name}</p>
+         <p>{this.props.library.address} </p>
+         <p>{this.props.library.city} </p>
+         <p>{this.props.library.postalCode}</p>
+         <div>
+            <button
+                onClick={ this.props.handleCreateSubmit}>
+                Add to My Favorite Library 
+            </button>
+         </div> 
+      </div>
+             
     );
   }
 }
