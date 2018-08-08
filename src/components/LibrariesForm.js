@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 
 class LibrariesForm extends Component {
+ 
   render() {
     return (
-      
+    <div className="landingPage">  
       <form
-        className="search"
+        className="search example" action="action_page.php"
         onSubmit={this.props.searchClick}
       >
       <input
         type="text"
         value={this.props.inputContentValue}
         name="content"
-        placeholder="Search by postal code or name"
+        placeholder="Search Library by Postal Code or Name"
         onChange={this.props.handleInputContentValue}
-      /><br/>
-        <button id="submit">Search Library</button>
+      />
+        <button id="submit"><i className="fa fa-search" /></button>
       </form>
+    </div>  
     );
   }
 }

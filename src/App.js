@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import axios from 'axios';
 import LibrariesForm from './components/LibrariesForm';
 import Library from './components/Library';
 import FavoriteLibrary from './components/FavoriteLibrary';
+import Logo from './images/queenslibrary.gif'
+import Header from './components/partials/Header';
+import Footer from './components/partials/Footer';
+import Map from './components/Map';
 
 class App extends Component {
   constructor () {
@@ -11,9 +16,13 @@ class App extends Component {
 
     this.state = {
         libraryInfo: [],
-        library: {},
+        library: { 
+          latitude:0,
+          longitude:0
+        },
         inputContentValue: "",
-        libraryTable: []
+        libraryTable: [],
+        showBlock: false
     }
 
     this.searchClick = this.searchClick.bind(this);
@@ -50,6 +59,11 @@ class App extends Component {
     let value = this.state.inputContentValue;
     this.searchbyName(value);
     this.searchbyPostCode(value);
+    
+    this.setState({
+       showBlock:true
+    })
+     
   }
   // search library by name
   searchbyName = (value) => {
@@ -64,7 +78,17 @@ class App extends Component {
          name: targetLib[0].name,
          address: targetLib[0].address,
          city: targetLib[0].city,
-         postalCode: targetLib[0].postcode
+         postalCode: targetLib[0].postcode,
+         latitude: parseFloat(targetLib[0].latitude),
+         longitude:parseFloat(targetLib[0].longitude),
+         mn:targetLib[0].mn,
+         tu:targetLib[0].tu,
+         we:targetLib[0].we,
+         th:targetLib[0].th,
+         fr:targetLib[0].fr,
+         sa:targetLib[0].sa,
+         su:targetLib[0].su
+
       }
       this.setState({ library:libObj });
     //  console.log(libObj);
@@ -83,10 +107,19 @@ class App extends Component {
         name: targetLib[0].name,
         address: targetLib[0].address,
         city: targetLib[0].city,
-        postalCode: targetLib[0].postcode
+        postalCode: targetLib[0].postcode,
+        latitude: parseFloat(targetLib[0].latitude),
+        longitude:parseFloat(targetLib[0].longitude),
+        mn:targetLib[0].mn,
+        tu:targetLib[0].tu,
+        we:targetLib[0].we,
+        th:targetLib[0].th,
+        fr:targetLib[0].fr,
+        sa:targetLib[0].sa,
+        su:targetLib[0].su
      }
       this.setState({ library:libObj });
-      console.log(libObj);
+    //  console.log(libObj);
     } else {
       console.log("Not found by postal code");
     }
@@ -152,6 +185,7 @@ class App extends Component {
   handleCreateSubmit = ( event ) => {
       event.preventDefault();
       this.createLibrary(this.state.library);   
+
   }
 
   handleUpdateSubmit = ( event) => {
@@ -161,35 +195,44 @@ class App extends Component {
   
   render() {
     return (
-      <div className="App">
-        <div className="header">
-          <h2>Search Your Library</h2>
-        </div>
-        
-        <LibrariesForm
-          searchClick={this.searchClick}
-          handleInputContentValue={this.handleInputContentValue}
-          inputContentValue={this.state.inputContentValue} 
-        />
-        <Library library={this.state.library} handleCreateSubmit={this.handleCreateSubmit}/>
-       
-        <h3>My Favorite Library List</h3>
-        {
-            this.state.libraryTable.map((library, index) => {
-                return(
-                    <FavoriteLibrary
-                      {...library}
-                      key={index}
-                      index={index}
-                      deleteLibrary={this.deleteLibrary}
-                      updateLibrary={this.updateLibrary}
-                      handleLibraryChange={this.handleLibraryChange}
-                      handleUpdateSubmit={this.handleUpdateSubmit}
-                    />
+     
+      <div className="container">
+      <Router > 
+        <div>
+          <Header />
+          <LibrariesForm
+              searchClick={this.searchClick}
+              handleInputContentValue={this.handleInputContentValue}
+              inputContentValue={this.state.inputContentValue} 
+          />
+          
+          <Library library={this.state.library} showBlock={this.state.showBlock} handleCreateSubmit={this.handleCreateSubmit}/>
+          <Map library={this.state.library} showBlock={this.state.showBlock}/>
+          <div className="title">
+             <h3>My Favorite Library List</h3>
+          </div>
+          {
+              
+              this.state.libraryTable.map((library, index) => {
+                  return(
+                      <FavoriteLibrary
+                        {...library}
+                        key={index}
+                        index={index}
+                        deleteLibrary={this.deleteLibrary}
+                        updateLibrary={this.updateLibrary}
+                        handleLibraryChange={this.handleLibraryChange}
+                        handleUpdateSubmit={this.handleUpdateSubmit}
+                      />
 
-                )
-            })
-        }
+                  )
+              })
+          }
+
+          <Footer />
+        </div>  
+      </Router>
+       
       </div>
     );
   }

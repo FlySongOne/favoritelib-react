@@ -3,8 +3,10 @@ import React, { Component } from "react";
 class FavoriteLibrary extends Component {
   render() {
     return (
-      <div className="favorite">
+    <div> 
         
+    <div className="favorite">
+        <div className="cell">
           <ul>    
               <li>Name: { this.props.name} </li>
               <li>Address: { this.props.address}</li>
@@ -16,6 +18,8 @@ class FavoriteLibrary extends Component {
               onClick={() => this.props.deleteLibrary(this.props.id, this.props.index)}>
               Delete
           </button>
+        </div> 
+        <div className="cell"> 
           <form
              className=""
              onSubmit={this.props.handleUpdateSubmit}
@@ -47,8 +51,9 @@ class FavoriteLibrary extends Component {
                   Update
               </button> 
            </form> 
-
-      </div>    
+        </div>
+      </div>   
+    </div>   
     );
   }
 }

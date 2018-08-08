@@ -1,27 +1,100 @@
-.App {
-  text-align: center;
-  background-color: #fafafa;
+.container {
+  width:80%;
+ 
+  margin:50px auto;
 }
 
-.header {
-  background-color: blanchedalmond;
-  height:80px;
+header{
+  display: flex;
+  height: 10%;
   width:100%;
-  padding:15px;
+}
+.nav{
+  background-color:#ffffff;
+  width:100%;
+  height:98px;
+  padding-top:10px;
 }
 
-input {
-  width: 150px;
-  height:40px;
+.logo {
+  flex:left;
+}
+
+.nav ul{
+  color:#ff3a00;
+  margin-left:200px;
+  margin-top:25px;
+}
+
+.nav ul li{
+  display:inline;
+  padding: 0px 20px 0px 20px;
+  font-size: 30px;
+ 
+}
+
+a{
+  text-decoration:none;
+  color: #232323;
+  font-family: Arial;
+}
+
+.landingPage {
+  width:100%;
+  height: 650px;
+  background-image: url("./images/keygarden.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-bottom: 50px;
+}
+
+.search {
+  text-align:center;
+  
+}
+
+.landingPage input{
+  margin-top:245px;
+}
+
+form.example input[type=text] {
+  height:43px;
+  padding: 10px;
+  font-size: 17px;
+  border: none;
+  width: 30%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  height:62px;
+  width: 10%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 20px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 button {
-  width:200px;
-  height:40px;
+  width:220px;
+  height:62px;
   margin:10px;
   font-size:15px;
-  background-color: #008ba1;
+  background-color: #2196F3;
   color: white;
+  cursor: pointer;
+ 
 }
 
 li {
@@ -29,10 +102,19 @@ li {
 }
 
 .favorite {
-  width:800px;
+  width:100%;
   height:300px;
   margin: 0 auto;
-  background-color: #88aac8;
+  background-color: #fefefe;
+  border:5px solid #f7f7f7;
+  display:flex;
+  text-align:center;
+}
+
+.favoriteList{
+  width:100%;
+  background-color: lightblue; 
+
 }
 
 .favorite ul {
@@ -40,3 +122,136 @@ li {
   padding-left:0;
   padding-top:10px;
 }
+
+.library {
+  background-color:#fefefe;
+  height: 300px;
+  width:90%;
+  border:5px solid #f7f7f7;
+  padding: 50px;
+  display:flex;
+  margin: 50px auto;
+  text-align:center;
+}
+
+.cell{
+  width:50%;
+  height:100%;
+  margin: 0 auto;
+  
+}
+.favorite .cell {
+  margin:30px auto;
+  
+}
+
+.favorite .cell button {
+  border-radius: 12px;
+  width:150px;
+}
+.cell form{
+  display:block;
+}
+
+.cell form input{
+  height:43px;
+  font-size: 17px;
+  border: 1px solid #fefefe;
+  width: 100%;
+  background: #f1f1f1;
+  text-align: center;
+}
+
+.title {
+  width:100%;
+  text-align:center;
+}
+
+.footer{
+  background-color:#54514a;
+  width:100%;
+  height:90px;
+  padding-top:60px;
+  margin:30px auto;
+  text-align: center;
+  color:#ffffff;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width:100%;
+   
+    margin:50px auto;
+  }
+
+  header{
+    display:block;
+  }
+  
+  .logo {
+   margin-left:12%;  
+  }
+  .nav ul{
+    margin-left: 20%; 
+    margin-top: 0;
+  }
+
+  .nav ul li{
+    display:block;
+    padding: 15px 0px 0px 0px;
+    font-size: 20px;
+    width:100%;
+    margin:0 auto;
+  }
+  .landingPage {
+    height:375px;
+  }
+
+  .landingPage input{
+    margin-top:300px;
+    
+  }
+
+  form.example input[type=text] {
+    height:40px;
+    font-size: 15px;
+    border: 1px solid #232323;
+    width: 70%;
+    
+  }
+
+  form.example button {
+    margin:0;
+    width: 17%;
+    border: 2px solid #2196F3;
+  }  
+
+  .library {
+   
+    height: 400px;
+    width:100%;
+    padding: 0;
+    display:flex;
+    margin:0 ;
+    text-align:center;
+    font-size:15px;
+  }
+
+  .add button {
+    width:150px; 
+  } 
+
+  .cell form input{
+   
+    font-size: 14px;
+    
+  }
+
+  .favorite .cell {
+    padding:0;
+    width:45%;
+    margin:5px;
+  }
+
+}
+
